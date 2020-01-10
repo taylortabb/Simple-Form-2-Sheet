@@ -1,0 +1,14 @@
+function doGet(e) {
+  doPost(e);
+}
+function doPost(e) {
+  // Sheet
+  var ss = SpreadsheetApp.openById("1M1gYsdeBmMH2trlFE6XbWjArRKNufCRgOf7rG4duc4M");
+  var sheet = ss.getSheetByName("Data");
+  // Timestamp
+  var timeZone = ss.getSpreadsheetTimeZone();
+  var timestamp = Utilities.formatDate(new Date(), timeZone, "dd/MM/yyyy HH:mm:ss");
+  // Write
+  sheet.appendRow([timestamp, e.parameter.hill, e.parameter.name, e.parameter.time, e.parameter.buggy, e.parameter.note]);
+  return ContentService.createTextOutput('false');
+}
